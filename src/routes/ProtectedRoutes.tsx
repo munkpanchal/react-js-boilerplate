@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router';
+import ProtectedLayout from '../components/layouts/ProtectedLayout';
+import Loading from '../components/shared/Loading';
 
-import Loader from '../components/shared/Loader';
-
-const ProtectedLayout: React.FC = () => {
-    const token = false;
+const ProtectedRoutes = () => {
+    const { user, isLoading } = { user: null, isLoading: false };
     const location = useLocation();
     const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -16,16 +16,19 @@ const ProtectedLayout: React.FC = () => {
         return () => clearTimeout(timer);
     }, [location.pathname]);
 
-    if (!token) {
-        return <Navigate to="/login" replace />;
+    if (isLoading || isTransitioning) {
+        return <Loading />;
+    }
+
+    if (!user) {
+        return <Navigate to="/" replace />;
     }
 
     return (
-        <>
-            {isTransitioning && <Loader />}
-            {<Outlet />}
-        </>
+        <ProtectedLayout>
+            <Outlet />
+        </ProtectedLayout>
     );
 };
 
-export default ProtectedLayout;
+export default ProtectedRoutes;

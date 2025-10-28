@@ -1,26 +1,15 @@
 import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router';
-
-import router from './routes/routes';
+import routes from './routes/routes';
 
 function App() {
     return (
         <>
-            <RouterProvider router={router} />
+            <RouterProvider router={routes} />
             <Toaster
                 position="top-center"
-                gutter={12}
-                containerStyle={{ margin: '8px' }}
                 toastOptions={{
-                    success: { duration: 2000 },
-                    error: { duration: 2000 },
-                    style: {
-                        fontSize: '16px',
-                        maxWidth: '500px',
-                        padding: '8px 16px',
-                        backgroundColor: '#fff',
-                        color: 'var(--color-primary)',
-                    },
+                    duration: 4000,
                 }}
             />
         </>

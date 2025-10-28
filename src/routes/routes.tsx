@@ -1,32 +1,28 @@
 import { createBrowserRouter } from 'react-router';
-
-import ProtectedLayout from '../layout/ProtectedLayout';
-import PublicLayout from '../layout/PublicLayout';
-import NotFoundPage from '../pages/NotFound';
-import DashboardPage from '../pages/protected/DashboardPage';
+import ProtectedPage from '../pages/protected/ProtectedPage';
 import Homepage from '../pages/public/Homepage';
+import ProtectedRoutes from './ProtectedRoutes';
+import PublicRoutes from './PublicRoutes';
 
-const router = createBrowserRouter([
+const routes = createBrowserRouter([
     {
-        element: <PublicLayout />,
+        element: <PublicRoutes />,
         children: [
             {
                 path: '/',
-                children: [{ path: '', element: <Homepage /> }],
+                element: <Homepage />,
             },
         ],
     },
-
     {
-        element: <ProtectedLayout />,
+        element: <ProtectedRoutes />,
         children: [
             {
-                path: '/dashboard/',
-                element: <DashboardPage />,
+                path: '/protected',
+                element: <ProtectedPage />,
             },
         ],
     },
-    { path: '*', element: <NotFoundPage /> },
 ]);
 
-export default router;
+export default routes;
