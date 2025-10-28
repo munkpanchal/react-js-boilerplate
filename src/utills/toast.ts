@@ -20,6 +20,10 @@ export const dismissToast = (toastId: string) => {
     toast.dismiss(toastId);
 };
 
-export const updateToast = (toastId: string, type: 'success' | 'error', message: string) => {
+export const updateToast = (
+    toastId: string,
+    type: 'success' | 'error',
+    message: string
+) => {
     toast[type](message, { id: toastId });
 };
